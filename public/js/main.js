@@ -119,7 +119,6 @@ function render(ctx) {
         }
 
         ctx.putImageData(image_data, 0, 0);
-
     }
 
     requestAnimationFrame(function () {
@@ -171,6 +170,9 @@ window.onload = function () {
     const canvas = document.querySelector('#display');
 
     canvas.onmousemove = onMouseMove;
+    canvas.onmouseout = function(){
+        MX = 0;
+    }
 
     /** @type {CanvasRenderingContext2D} */
     const ctx = canvas.getContext('2d');
