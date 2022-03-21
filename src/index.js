@@ -25,6 +25,7 @@ app.post('/submit', async (req, res) => {
     const percentage = 100 - (DIFF / original.bitmap.data.length)
 
 
+    console.log(percentage);
     //#51B5A9
 
     res.json({
