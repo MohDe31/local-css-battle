@@ -7,6 +7,11 @@
   "author": "Bouderbala Mohammed Amine & Ahmia Ahmed",
   "license": "MIT",
   "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "serve": "nodemon src/index.j"
+  },
   "dependencies": {
     "express": "^4.17.3"
   }
