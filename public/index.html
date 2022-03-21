@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Esperanza CSS Battle</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/css/css.min.js"
+        integrity="sha512-2gAMyrBfWPuTJDA2ZNIWVrBBe9eN6/hOjyvewDd0bsk2Zg06sUla/nPPlqQs75MQMvJ+S5AmfKmq9q3+W2qeKw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/xml/xml.min.js"
+        integrity="sha512-UWfBe6aiZInvbBlm91IURVHHTwigTPtM3M4B73a8AykmxhDWq4EC/V2rgUNiLgmd/i0y0KWHolqmVQyJ35JsNA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"
+        integrity="sha512-IS1FyxQkiJHT1SAvLXBaJu1UTFSIw0GT/DuzxHl69djqyLoEwGmR2davcZUnB8M7ppi9nfTGZR/vdfqmWt+i6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/htmlmixed/htmlmixed.min.js"
+        integrity="sha512-0IM15+FEzmvrcePHk/gDCLbZnmja9DhCDUrESXPYLM4r+eDtNadxDUa5Fd/tNQGCbCoxu75TaVuvJkdmq0uh/w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css"
+        integrity="sha512-uf06llspW44/LZpHzHT6qBOIVODjWtv4MxCricRxkzvopAlSWnTf6hpZTFxuuZcuNE9CBQhqE0Seu1CoRk84nQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div class="header">
+        <img class="logo" src="img/logo.svg" alt="logo">
+    </div>
+
+    <div class="navbar">
+        <div>
+            editor
+        </div>
+        <div>
+            output
+        </div>
+        <div>
+            target
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="editor">
+            <textarea name="" id="editor"></textarea>
+            <button type="button" onclick="sStyle()">Submit</button>
+        </div>
+        <div class="output">
+            <div class="container" id="pg">
+                <div class="ctn"></div>
+
+                <style>
+                .ctn {
+                    width: 100px;
+                    height: 100px;
+                    background-color: blue;
+                }
+                </style>
+            </div>
+            <div class="score">
+                <h4>your score</h4>
+                <h6>Score <span>0</span></h6>
+            </div>
+        </div>
+        <div class="target">
+            <canvas width="500" height="500" id="display" style="background-color: red;"></canvas>
+            <div class="color-to-use">
+                <h4>colors to use</h4>
+                <ul>
+                    <li>#EEE</li>
+                    <li>#DDD</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        &copy; esperanza css battle
+    </div>
+</body>
+<script src="./js/marvinj.js"></script>
+<script src="./js/html2canvas.js"></script>
+<script src="./js/main.js"></script>
+
+</html>
