@@ -1,0 +1,13 @@
+{
+  "name": "local-css-battle",
+  "version": "0.0.1",
+  "description": "A local css battle website",
+  "main": "src/index.js",
+  "repository": "git@github.com:MohDe31/local-css-battle.git",
+  "author": "Bouderbala Mohammed Amine & Ahmia Ahmed",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
