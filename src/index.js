@@ -10,8 +10,6 @@ app.use(express.json());
 
 app.use(express.static('./public'));
 
-Jimp.read(readFileSync('./public/img/6.png'));
-
 app.post('/submit', async (req, res) => {
     const { data } = req.body;
     
