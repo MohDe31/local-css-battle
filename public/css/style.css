@@ -1,5 +1,12 @@
 * {
-    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-family: IBM Plex Mono,Menlo,DejaVu Sans Mono,Lucida Console,monospace;
+    padding: 0;
+    margin: 0;
+}
+
+
+body {
+    height: 100vh;
 }
 
 :root{
@@ -9,9 +16,13 @@
     --main-color: #0f1117;
     --second-color: #27313a;
     --third-color: #13181c;
+
+    --clr-border: #27313a;
+    --clr-bg: #171d23;
 }
 
 .header{
+    height: 36px;
     padding: 10px;
 }
 
@@ -19,20 +30,42 @@
     background-color: var(--second-color);
     padding: 10px;
     display: flex;
-    justify-content: space-around;
+    height: 16px;
     text-transform: uppercase;
+    text-align: center;
 }
 
-.main{
-    display: flex;
-    justify-content: space-between !important;
-    height: 100vh;
-    margin-top: 5px;
+.CodeMirror {
+    height: 100% !important;
 }
-.editor{
-    width: 25%;
+
+.main {
+    display: flex;
+    margin-top: 5px;
+    height: calc(100% - 113px);
+}
+
+.editor {
+    width: 100%;
     height: 100%;
 }
+
+.output {
+    width: 450px;
+    border-right: 1px solid var(--clr-border);
+    background-color: var(--clr-bg) !important;
+
+    padding: 1rem;
+}
+
+.target {
+    width: 450px;
+    border-right: 1px solid var(--clr-border);
+    background-color: var(--clr-bg) !important;
+
+    padding: 1rem;
+}
+
 textarea{
     width: 100%;
     height: 100%;
@@ -47,6 +80,13 @@ textarea{
     color: white;
     width: 100px;
     display: block;
+}
+
+.sub {
+    position: fixed;
+    left: 1rem;
+    bottom: 3rem;
+    z-index: 99;
 }
 
 .editor button:hover{
@@ -64,8 +104,13 @@ h4 {
     text-transform: uppercase;
 }
 
+.target {
+    background-color: #27313a;
+}
+
 .color-to-use {
     width: 100% !important;
+    background-color: transparent !important;
 }
 
 .target ul{
@@ -102,13 +147,15 @@ h4 {
     background-color: black;
     position: fixed;
     bottom: 0;
+    height: 16px;
     width: 100%;
     text-transform: uppercase;
 }
 
 
 .container {
-    width: 500px;
-    height: 500px;
-}
+    width: 400px;
+    height: 300px;
 
+    background-color: var(--clr-border);
+}

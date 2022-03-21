@@ -31,7 +31,7 @@ let im2 = false;
 let image_data;
 
 function sStyle() {
-    const tex = document.querySelector('#editor');
+    // const tex = document.querySelector('#editor');
     document.querySelector('#pg').innerHTML = editor.getValue();
 
 
@@ -40,12 +40,24 @@ function sStyle() {
         const b64 = canvas.toDataURL();
 
 
-        image1.load(b64, function () {
-            im1 = true;
+        
+        image1.load(b64, async function () {
+            /*const response = await fetch('/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    data: b64
+                })
+            });
+        
+        
+            console.log(await response.json());
+            */
         });
+        
     });
-
-
 }
 
 const diff = true;
@@ -57,25 +69,25 @@ const diff = true;
 function render(ctx) {
     if (im1 && im2) {
 
-        for (let i = 0; i < 500; i++) {
-            for (let j = 0; j < 500; j++) {
+        for (let i = 0; i < image1.getWidth(); i++) {
+            for (let j = 0; j < image1.getHeight(); j++) {
                 if (i <= MX) {
 
                     const R = Math.abs(image1.getIntComponent0(i, j) - (diff ? image2.getIntComponent0(i, j) : 0));
                     const G = Math.abs(image1.getIntComponent1(i, j) - (diff ? image2.getIntComponent1(i, j) : 0));
                     const B = Math.abs(image1.getIntComponent2(i, j) - (diff ? image2.getIntComponent2(i, j) : 0));
 
-                    image_data.data[(j * 500 + i) * 4] = R;
-                    image_data.data[(j * 500 + i) * 4 + 1] = G;
-                    image_data.data[(j * 500 + i) * 4 + 2] = B;
+                    image_data.data[(j * 400 + i) * 4] = R;
+                    image_data.data[(j * 400 + i) * 4 + 1] = G;
+                    image_data.data[(j * 400 + i) * 4 + 2] = B;
                 } else {
-                    image_data.data[(j * 500 + i) * 4] = image2.getIntComponent0(i, j);
-                    image_data.data[(j * 500 + i) * 4 + 1] = image2.getIntComponent1(i, j);
-                    image_data.data[(j * 500 + i) * 4 + 2] = image2.getIntComponent2(i, j);
+                    image_data.data[(j * 400 + i) * 4] = image2.getIntComponent0(i, j);
+                    image_data.data[(j * 400 + i) * 4 + 1] = image2.getIntComponent1(i, j);
+                    image_data.data[(j * 400 + i) * 4 + 2] = image2.getIntComponent2(i, j);
                 }
 
 
-                image_data.data[(j * 500 + i) * 4 + 3] = 255;
+                image_data.data[(j * 400 + i) * 4 + 3] = 255;
             }
         }
 
@@ -103,11 +115,15 @@ window.onload = function () {
 
     editor = CodeMirror.fromTextArea(tex, {
         lineNumbers: true,
-        mode: 'htmlmixed'
+        mode: 'htmlmixed',
+        theme: 'dracula',
+        width: '100%',
+        height: '100%'
     });
 
 
-    editor.setSize(500, 500);
+    editor.on('keyup', sStyle);
+    // editor.setSize(400, 500);
 
     html2canvas(document.querySelector(".container")).then((canvas) => {
         const b64 = canvas.toDataURL();
@@ -132,7 +148,7 @@ window.onload = function () {
     /** @type {CanvasRenderingContext2D} */
     const ctx = canvas.getContext('2d');
 
-    image_data = ctx.createImageData(500, 500);
+    image_data = ctx.createImageData(400, 300);
 
     ctx.putImageData(image_data, 0, 0);
 

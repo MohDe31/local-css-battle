@@ -4,7 +4,10 @@
 <head>
     <title>Esperanza CSS Battle</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="./assets/-F6qfjptAgt5VM-kVkqdyU8n3twJwlBFgsAXHNk.woff2">
+    <link rel="stylesheet" href="https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3twJwlBFgsAXHNk.woff2">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <link rel="stylesheet" href="css/dracula.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/css/css.min.js"
         integrity="sha512-2gAMyrBfWPuTJDA2ZNIWVrBBe9eN6/hOjyvewDd0bsk2Zg06sUla/nPPlqQs75MQMvJ+S5AmfKmq9q3+W2qeKw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -28,21 +31,22 @@
     </div>
 
     <div class="navbar">
-        <div>
+        <div style="width: calc(100% - 900px);">
             editor
         </div>
-        <div>
+        <div style="width: 450px;">
             output
         </div>
-        <div>
+        <div style="width: 450px;">
             target
         </div>
     </div>
 
     <div class="main">
         <div class="editor">
-            <textarea name="" id="editor"></textarea>
-            <button type="button" onclick="sStyle()">Submit</button>
+            <textarea name="" id="editor">
+            </textarea>
+            <button type="button" class="sub" onclick="sStyle()">Submit</button>
         </div>
         <div class="output">
             <div class="container" id="pg">
@@ -58,11 +62,10 @@
             </div>
             <div class="score">
                 <h4>your score</h4>
-                <h6>Score <span>0</span></h6>
             </div>
         </div>
         <div class="target">
-            <canvas width="500" height="500" id="display" style="background-color: red;"></canvas>
+            <canvas width="400" height="300" id="display" style="background-color: red;"></canvas>
             <div class="color-to-use">
                 <h4>colors to use</h4>
                 <ul>
