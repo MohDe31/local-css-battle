@@ -21,7 +21,7 @@ body {
     --clr-bg: #171d23;
 }
 
-.header{
+.header {
     height: 36px;
     padding: 10px;
 }
@@ -154,8 +154,10 @@ h4 {
 
 
 .container {
+    position: relative;
     width: 400px;
     height: 300px;
 
     background-color: var(--clr-border);
+    border: none;
 }
