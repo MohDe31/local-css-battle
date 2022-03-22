@@ -1,4 +1,3 @@
-import { readFileSync } from 'fs';
 import express from "express";
 import Jimp from 'jimp';
 import { CURRENT_CHALLENGE } from './image.js';
@@ -11,17 +10,25 @@ app.use(express.json());
 
 app.use(express.static('./public'));
 
+const users_submitted = [];
 
 app.get('/challenge', (req, res) => {
     res.json({
-        data: CURRENT_CHALLENGE
+        data: `data:image/png;base64,${CURRENT_CHALLENGE}`
     })
 });
 
 app.post('/submit', async (req, res) => {
-    const { data } = req.body;
+    const { data, uname } = req.body;
+
+    if(users_submitted.includes(uname)) {
+        return res.json({
+            success: false,
+            reason: 'Already submitted please wait for the result'
+        });
+    }
     
-    const original = await Jimp.read(readFileSync('./public/img/6.png'));
+    const original = await Jimp.read(Buffer.from(CURRENT_CHALLENGE, 'base64'));
     const value = await Jimp.read(Buffer.from(data.split(',')[1], 'base64'));
 
     let DIFF = 0;
@@ -36,8 +43,10 @@ app.post('/submit', async (req, res) => {
 
     const percentage = 100 - error;
 
+    users_submitted.push(uname);
 
-    console.log(percentage);
+    console.log(uname, percentage);
+
     //#51B5A9
 
     res.json({

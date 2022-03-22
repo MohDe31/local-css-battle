@@ -17,7 +17,7 @@ function onMouseMove(e) {
     const yPos = y - top;
 
 
-    MX = -1; //xPos;
+    MX = xPos;
     MY = yPos;
 
 }
@@ -78,10 +78,10 @@ function render(ctx) {
         for (let i = 0; i < image1.getWidth(); i++) {
             for (let j = 0; j < image1.getHeight(); j++) {
 
-                image_data.data[(j * 400 + i) * 4] = image1.getIntComponent0(i, j);
-                image_data.data[(j * 400 + i) * 4 + 1] = image1.getIntComponent1(i, j);
-                image_data.data[(j * 400 + i) * 4 + 2] = image1.getIntComponent2(i, j);
-                /*
+                // image_data.data[(j * 400 + i) * 4] = image1.getIntComponent0(i, j);
+                // image_data.data[(j * 400 + i) * 4 + 1] = image1.getIntComponent1(i, j);
+                // image_data.data[(j * 400 + i) * 4 + 2] = image1.getIntComponent2(i, j);
+                
                 if (i <= MX) {
 
                     const R = Math.abs(image1.getIntComponent0(i, j) - (diff ? image2.getIntComponent0(i, j) : 0));
@@ -98,7 +98,7 @@ function render(ctx) {
                 }
 
 
-                */
+                
                image_data.data[(j * 400 + i) * 4 + 3] = 255;
             }
         }
@@ -117,7 +117,7 @@ window.onload = async function () {
     prevDoc.body.style.width  = '400px';
     prevDoc.body.style.background  = 'white';
     prevDoc.body.style.overflow = 'hidden';
-        
+
     const tex = document.querySelector('#editor');
     tex.value = `
 <div class="ctn"></div>
