@@ -1,6 +1,7 @@
-import { createReadStream, fstat, readFileSync, writeFileSync } from 'fs';
+import { readFileSync } from 'fs';
 import express from "express";
 import Jimp from 'jimp';
+import { CURRENT_CHALLENGE } from './image.js';
 
 const app = express();
 
@@ -9,6 +10,13 @@ const PORT = 1337;
 app.use(express.json());
 
 app.use(express.static('./public'));
+
+
+app.get('/challenge', (req, res) => {
+    res.json({
+        data: CURRENT_CHALLENGE
+    })
+});
 
 app.post('/submit', async (req, res) => {
     const { data } = req.body;
@@ -19,10 +27,14 @@ app.post('/submit', async (req, res) => {
     let DIFF = 0;
 
     for(let i = 0; i < original.bitmap.data.length; i+=1){
-        DIFF += Math.abs(original.bitmap.data[i] - value.bitmap.data[i]);
+        const e = Math.abs(original.bitmap.data[i] - value.bitmap.data[i]);
+        DIFF += e < 1? 0: 255;
+        
     }
 
-    const percentage = 100 - (DIFF / original.bitmap.data.length)
+    const error = 100 * (DIFF / (original.bitmap.data.length - (400*300))) / 255;
+
+    const percentage = 100 - error;
 
 
     console.log(percentage);
