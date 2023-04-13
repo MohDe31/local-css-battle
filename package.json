@@ -15,5 +15,8 @@
   "dependencies": {
     "express": "^4.17.3",
     "jimp": "^0.16.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
   }
 }
