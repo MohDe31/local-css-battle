@@ -87,6 +87,69 @@ textarea{
     left: 1rem;
     bottom: 3rem;
     z-index: 99;
+    background-color: #5d2bbf !important;
+    font-weight: bold;
+}
+.splash {
+    visibility: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background-color: white;
+
+    display: flex;
+    justify-content: center;
+    place-items: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.splash.show {
+    visibility: visible;
+    animation: fadeIn 1s;
+}
+
+.perc {
+    font-size: 4rem;
+    font-weight: bold;
+    color: black;
+
+}
+:root{
+  --w: 500px;
+  --h: 50px;
+  --o: 10px;
+
+  --nw: calc(var(--w) + var(--o));
+  --nh: calc(var(--h) + var(--o));
+}
+.perc-ctn {
+    background-color: white;
+    position: absolute;
+    left: calc(50% - var(--w)/2);
+    margin-top: calc(var(--o) / 2);
+    width: var(--w);
+    height: var(--h);
+    clip: rect(0px, 0, var(--h), 0);
+    transition: clip 1s;
+    display: flex;
+    justify-content: center;
+}
+
+.perc-otl {
+    position: absolute;
+    left: calc(50% - var(--nw)/2);
+    width: var(--nw);
+    height: var(--nh);
+    background-color: black;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
 }
 
 .editor button:hover{

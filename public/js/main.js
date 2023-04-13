@@ -60,13 +60,33 @@ async function submit(){
             })
         });
     
+        if(response.status !== 200)
+        {
+          alert('something went wrong please report to the admin!');
+          location.reload();
+        }
         const json = await response.json();
+
+        if(json.success)
+        {
+          startSplashScreen(parseFloat(json.percentage));
+        }
 
         // alert(`You got ${Math.round(json.percentage)}%!`);            
     });
 }
 
 const diff = true;
+
+
+function startSplashScreen(percentage) {
+  const splash = document.querySelector(".splash");
+  const perc   = document.querySelector("#perc");
+  const perc_ctn = document.querySelector("#perc-ctn");
+  perc.innerHTML = percentage.toFixed(2) + '%';
+  splash.classList.toggle('show');
+  perc_ctn.setAttribute('style', `clip: rect(0px, calc(var(--w) * ${percentage/100}), var(--h), 0px)`);
+}
 
 /**
  * 
