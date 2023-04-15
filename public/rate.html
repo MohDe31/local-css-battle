@@ -26,7 +26,7 @@
 
         let interval = null;
 
-        function insertToTable(rank, username, score) {
+        function insertToTable(rank, username, score, time) {
             const row = document.createElement("div");
             row.classList.add("row");
 
@@ -36,19 +36,23 @@
             cell2.append(username);
             const cell3 = document.createElement("div");
             cell3.append(score);
+            const cell4 = document.createElement("div");
+            cell4.append(time);
 
-            row.append(cell1, cell2, cell3);
+            row.append(cell1, cell2, cell3, cell4);
             table.append(row);
         }
 
         function renderResults() {
             table.innerHTML = "";
-            insertToTable("Rank", "Username", "Result");
+            insertToTable("Rank", "Username", "Result", "Time");
             submited_users.forEach((user, index) => {
+                const {h, m, s} = formatMS(user.time);
                 insertToTable(
                     index + 1,
                     user.uname,
-                    `${user.percentage.toFixed(2)}%`
+                    `${user.percentage.toFixed(2)}%`,
+                    `${zf0(h)}:${zf0(m)}:${zf0(s)}`
                 );
             });
         }

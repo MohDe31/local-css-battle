@@ -18,10 +18,12 @@ app.use(express.static("./public"));
 
 const users_submitted = [];
 
-let time = null;
+let startTime = null;
+let endTime   = null;
 
 app.get("/challenge", (req, res) => {
-    time = time ?? new Date().getTime() + TIME * 6e4;
+    startTime = startTime ?? new Date().getTime();
+    endTime = endTime ?? startTime + TIME * 6e4;
 
     res.json({
         data: `data:image/png;base64,${CURRENT_CHALLENGE}`,
@@ -29,7 +31,7 @@ app.get("/challenge", (req, res) => {
 });
 
 app.get("/submited", (req, res) => {
-    return res.json({ users_submitted, time });
+    return res.json({ users_submitted, time: endTime });
 });
 
 app.post("/submit", async (req, res) => {
@@ -57,7 +59,7 @@ app.post("/submit", async (req, res) => {
 
     const percentage = 100 - error;
 
-    users_submitted.push({ uname, percentage, time: new Date().getTime() });
+    users_submitted.push({ uname, percentage, time: new Date().getTime() - startTime});
 
     io.sockets.emit("submit", users_submitted);
 
