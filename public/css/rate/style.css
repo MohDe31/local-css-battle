@@ -13,6 +13,8 @@ td {
 
 table {
   width: 100vw;
+  background-color: transparent;
+  border-spacing: 1rem;
 }
 
 td,
@@ -21,6 +23,21 @@ th {
   border-radius: 1rem;
   padding: 2rem;
   background-color: gainsboro;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+td {
+  animation: animate 1s linear;
+}
+
+@keyframes animate {
+  from {
+    scale: 0px;
+    transform: translateY(100vh);
+  }
+  to {
+    transform: translateY(0vh);
+  }
 }
 
 .cls {
