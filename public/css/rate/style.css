@@ -26,13 +26,13 @@
     height: 100vh;
 }
 
-td {
-    text-align: center;
-}
-
 .row div {
     flex: 40%;
     text-align: center;
+}
+
+.row:not(:first-child) div:first-child::before {
+    content: "#";
 }
 
 .row div:first-child {
@@ -41,12 +41,14 @@ td {
 
 .row:first-child {
     font-weight: 800;
-    font-size: 1.25rem;
+    /*font-size: 1.25rem;*/
+    font-size: 1.75rem;
     margin-bottom: 1rem;
 }
 
 .row {
     display: flex;
+    font-size: 1.5rem;
 }
 
 .table {
@@ -57,25 +59,4 @@ td {
 
     height: 50%;
     width: 60%;
-}
-
-td,
-th {
-    width: 45%;
-
-    padding: 2rem;
-    background-color: white;
-    /* box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); */
-}
-
-td {
-    animation: animate 1s linear;
-}
-
-th {
-    border: 1px solid black;
-}
-
-.cls {
-    width: 10%;
 }
