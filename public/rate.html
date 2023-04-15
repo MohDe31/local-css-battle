@@ -1,75 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/rate/style.css" />
-    <title>Document</title>
-  </head>
-  <body>
-    <table>
-      <thead>
-        <th class="cls">Rank</th>
-        <th>Username</th>
-        <th>Result</th>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="css/rate/style.css" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="counter"></div>
+            <div class="table"></div>
+        </div>
+    </body>
 
-  <script src="/socket.io/socket.io.js"></script>
-  <script>
-    const socket = io();
-    const table = document.querySelector("table");
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        const table = document.querySelector(".table");
+        const counter = document.querySelector(".counter");
 
-    let submited_users = [];
+        let submited_users = [];
 
-    function insertToTable(rank, username, score) {
-      const row = table.tBodies[0].insertRow();
-      const cell1 = row.insertCell(0);
-      cell1.className = "cls";
-      cell1.append(rank);
-      const cell2 = row.insertCell(1);
-      cell2.append(username);
-      const cell3 = row.insertCell(2);
-      cell3.append(`${score.toFixed(2)}%`);
-    }
+        let time = null;
 
-    function renderResults() {
-      table.tBodies[0].innerHTML = "";
-      submited_users.forEach((user, index) => {
-        insertToTable(index + 1, user.uname, user.percentage);
-      });
-    }
+        let interval = null;
 
-    function sortResults() {
-      return submited_users.sort((a, b) => {
-        if (a.percentage > b.percentage) {
-          return -1;
+        function insertToTable(rank, username, score) {
+            const row = document.createElement("div");
+            row.classList.add("row");
+
+            const cell1 = document.createElement("div");
+            cell1.append(rank);
+            const cell2 = document.createElement("div");
+            cell2.append(username);
+            const cell3 = document.createElement("div");
+            cell3.append(score);
+
+            row.append(cell1, cell2, cell3);
+            table.append(row);
         }
 
-        if (a.percentage === b.percentage) {
-          return 0;
+        function renderResults() {
+            table.innerHTML = "";
+            insertToTable("Rank", "Username", "Result");
+            submited_users.forEach((user, index) => {
+                insertToTable(
+                    index + 1,
+                    user.uname,
+                    `${user.percentage.toFixed(2)}%`
+                );
+            });
         }
 
-        if (a.percentage < b.percentage) {
-          return 1;
+        function sortResults() {
+            return submited_users.sort((a, b) => {
+                if (a.percentage > b.percentage) {
+                    return -1;
+                }
+
+                if (a.percentage < b.percentage) {
+                    return 1;
+                }
+
+                if (a.percentage === b.percentage) {
+                    if (a.time < b.time) {
+                        return -1;
+                    }
+
+                    if (a.time > b.time) {
+                        return 1;
+                    }
+
+                    if (a.time === b.time) {
+                        return 0;
+                    }
+
+                    return 0;
+                }
+            });
         }
-      });
-    }
 
-    fetch("submited").then(async (res) => {
-      const json = await res.json();
-      submited_users = json.users_submitted;
-      sortResults();
-      renderResults();
-    });
+        function startCounter() {
+            interval = setInterval(() => {
+                time -= 1000;
+                if (time < 0) {
+                    time = 0;
+                    clearInterval(interval);
+                }
+                const { h, m, s } = formatMS(time);
+                counter.innerText = `${zf0(h)}:${zf0(m)}:${zf0(s)}`;
+            }, 1000);
+        }
 
-    socket.on("submit", (username) => {
-      submited_users.push(username);
-      sortResults();
-      renderResults();
-    });
-  </script>
+        function formatMS(timeMs) {
+            const h = Math.floor(timeMs / 3.6e6);
+            timeMs -= h * 3.6e6;
+
+            const m = Math.floor(timeMs / 6e4);
+            timeMs -= m * 6e4;
+
+            const s = Math.floor(timeMs / 1e3);
+
+            return { s, h, m };
+        }
+
+        function zf0(num) {
+            return num.toString().padStart(2, "0");
+        }
+
+        fetch("submited").then(async (res) => {
+            const json = await res.json();
+            time = new Date(json.time - new Date().getTime()).getTime();
+
+            submited_users = json.users_submitted;
+
+            startCounter();
+            sortResults();
+            renderResults();
+        });
+
+        socket.on("submit", (username) => {
+            submited_users = username;
+            sortResults();
+            renderResults();
+        });
+    </script>
 </html>
