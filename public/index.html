@@ -1,56 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <title>Esperanza CSS Battle</title>
-    <link rel="stylesheet" href="css/codemirror.min.css">
-    <link rel="stylesheet" href="css/dracula.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="./assets/-F6qfjptAgt5VM-kVkqdyU8n3twJwlBFgsAXHNk.woff2">
+    <link rel="stylesheet" href="css/codemirror.min.css" />
+    <link rel="stylesheet" href="css/dracula.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="./assets/-F6qfjptAgt5VM-kVkqdyU8n3twJwlBFgsAXHNk.woff2"
+    />
 
     <script src="./js/codemirror.min.js"></script>
     <script src="./js/css.min.js"></script>
     <script src="./js/xml.min.js"></script>
     <script src="./js/javascript.min.js"></script>
     <script src="./js/htmlmixed.min.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="splash">
-        <div class="perc" id="perc"></div>
-        <div>
-            <div class="perc-otl"></div>
-            <div class="perc-ctn" id="perc-ctn"> </div>
-        </div>
+      <div class="perc" id="perc"></div>
+      <div>
+        <div class="perc-otl"></div>
+        <div class="perc-ctn" id="perc-ctn"></div>
+      </div>
     </div>
     <div class="header">
-        <img class="logo" src="img/logo.svg" alt="logo">
+      <img class="logo" src="img/logo.svg" alt="logo" />
     </div>
 
     <div class="navbar">
-        <div style="width: calc(100% - 900px);">
-            editor
-        </div>
-        <div style="width: 450px;">
-            output
-        </div>
-        <div style="width: 450px;">
-            target
-        </div>
+      <div style="width: calc(100% - 900px)">editor</div>
+      <div style="width: 450px">output</div>
+      <div style="width: 450px">target</div>
     </div>
 
     <div class="main">
-        <div class="editor">
-            <textarea name="" id="editor">
-            </textarea>
-            <button type="button" class="sub" onclick="submit()">Submit</button>
-        </div>
-        <div class="output">
-            <iframe title="preview" id="preview" class="container"></iframe>
-        </div>
-        <div class="target">
-            <canvas width="400" height="300" id="display" style="background-color: red;"></canvas>
-            <!--
+      <div class="editor">
+        <textarea name="" id="editor"> </textarea>
+        <button type="button" class="sub" onclick="submit()">Submit</button>
+      </div>
+      <div class="output">
+        <iframe title="preview" id="preview" class="container"></iframe>
+      </div>
+      <div class="target">
+        <canvas
+          width="400"
+          height="300"
+          id="display"
+          style="background-color: red"
+        ></canvas>
+        <!--
             <div class="color-to-use">
                 <h4>colors to use</h4>
                 <ul>
@@ -59,15 +59,12 @@
                 </ul>
             </div>
             -->
-        </div>
+      </div>
     </div>
 
-    <div class="footer">
-        &copy; esperanza css battle
-    </div>
-</body>
-<script src="./js/marvinj.js"></script>
-<script src="./js/html2canvas.js"></script>
-<script src="./js/main.js"></script>
-
+    <div class="footer">&copy; esperanza css battle</div>
+  </body>
+  <script src="./js/marvinj.js"></script>
+  <script src="./js/html2canvas.js"></script>
+  <script src="./js/main.js"></script>
 </html>
