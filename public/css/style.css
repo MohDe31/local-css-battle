@@ -1,18 +1,18 @@
 * {
-    font-family: IBM Plex Mono,Menlo,DejaVu Sans Mono,Lucida Console,monospace;
+    font-family: IBM Plex Mono, Menlo, DejaVu Sans Mono, Lucida Console,
+        monospace;
     padding: 0;
     margin: 0;
 }
-
 
 body {
     height: 100vh;
 }
 
-:root{
+:root {
     box-sizing: border-box;
     background-color: var(--main-color);
-    color: #FFF;
+    color: #fff;
     --main-color: #0f1117;
     --second-color: #27313a;
     --third-color: #13181c;
@@ -26,7 +26,7 @@ body {
     padding: 10px;
 }
 
-.navbar{
+.navbar {
     background-color: var(--second-color);
     padding: 10px;
     display: flex;
@@ -66,12 +66,12 @@ body {
     padding: 1rem;
 }
 
-textarea{
+textarea {
     width: 100%;
     height: 100%;
 }
 
-.editor button{
+.editor button {
     margin: 0 auto;
     padding: 10px;
     border: none;
@@ -116,20 +116,19 @@ textarea{
     font-size: 4rem;
     font-weight: bold;
     color: black;
-
 }
-:root{
-  --w: 500px;
-  --h: 50px;
-  --o: 10px;
+:root {
+    --w: 500px;
+    --h: 50px;
+    --o: 10px;
 
-  --nw: calc(var(--w) + var(--o));
-  --nh: calc(var(--h) + var(--o));
+    --nw: calc(var(--w) + var(--o));
+    --nh: calc(var(--h) + var(--o));
 }
 .perc-ctn {
     background-color: white;
     position: absolute;
-    left: calc(50% - var(--w)/2);
+    left: calc(50% - var(--w) / 2);
     margin-top: calc(var(--o) / 2);
     width: var(--w);
     height: var(--h);
@@ -141,23 +140,27 @@ textarea{
 
 .perc-otl {
     position: absolute;
-    left: calc(50% - var(--nw)/2);
+    left: calc(50% - var(--nw) / 2);
     width: var(--nw);
     height: var(--nh);
     background-color: black;
 }
 
 @keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity:1 ;}
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
-.editor button:hover{
+.editor button:hover {
     background-color: aqua;
     cursor: pointer;
 }
 
-.output .score h6{
+.output .score h6 {
     padding: 20px;
     background-color: var(--third-color);
 }
@@ -176,13 +179,11 @@ h4 {
     background-color: transparent !important;
 }
 
-.target ul{
+.target ul {
     list-style: none;
     display: flex;
-    justify-content:left;
-
+    justify-content: left;
 }
-
 
 .target li {
     width: fit-content;
@@ -196,15 +197,14 @@ h4 {
     border-radius: 50%;
 }
 
-.target ul li{
+.target ul li {
     background-color: green;
     margin-right: 5px;
     padding: 5px;
     border-radius: 50px;
-
 }
 
-.footer{
+.footer {
     padding: 10px;
     text-align: center;
     background-color: black;
@@ -214,7 +214,6 @@ h4 {
     width: 100%;
     text-transform: uppercase;
 }
-
 
 .container {
     position: relative;
