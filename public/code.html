@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="css/code/style.css" />
+        <title>Submit Code</title>
+    </head>
+    <body>
+        <div class="container">
+            <p>Submit Your Code</p>
+            <textarea></textarea>
+            <div>
+                <select>
+                    <option value="py">Python</option>
+                    <option value="js">Javascript</option>
+                </select>
+                <button>Submit</button>
+            </div>
+        </div>
+    </body>
+
+    <script>
+        let uname = localStorage.getItem("uname");
+        if (!uname) {
+            uname = prompt("Please enter a username")
+                .trim()
+                .split(" ")
+                .join("_");
+
+            localStorage.setItem("uname", uname);
+        }
+
+        const submitBtn = document.querySelector("button");
+        let codeToSubmit;
+        let lang;
+
+        submitBtn.onclick = () => {
+            codeToSubmit = document.querySelector("textarea").value;
+            lang = document.querySelector("select").value;
+            fetch("submitCode", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    uname,
+                    code: codeToSubmit,
+                    lang,
+                }),
+            });
+        };
+    </script>
+</html>

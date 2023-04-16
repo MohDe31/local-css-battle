@@ -1,5 +1,8 @@
 import express from "express";
 import { createServer } from "http";
+import prettier from "prettier";
+import fs from "fs";
+import { exec } from "child_process";
 import { Server } from "socket.io";
 import Jimp from "jimp";
 import { CURRENT_CHALLENGE, TIME } from "./config.js";
@@ -19,10 +22,13 @@ app.use(express.static("./public"));
 const users_submitted = [];
 
 let startTime = null;
-let endTime   = null;
+let endTime = null;
 
 app.get("/challenge", (req, res) => {
-    startTime = startTime ?? new Date().getTime();
+    startTime =
+        startTime ??
+        (io.sockets.emit("refreshed", new Date().getTime()) &&
+            new Date().getTime());
     endTime = endTime ?? startTime + TIME * 6e4;
 
     res.json({
@@ -30,8 +36,61 @@ app.get("/challenge", (req, res) => {
     });
 });
 
+app.get("/codeTime", (req, res) => {
+    startTime = startTime ?? new Date().getTime();
+    endTime = endTime ?? startTime + TIME * 6e4;
+
+    res.json({
+        time: endTime,
+    });
+});
+
 app.get("/submited", (req, res) => {
     return res.json({ users_submitted, time: endTime });
+});
+
+app.post("/submitCode", async (req, res) => {
+    let { code, lang, uname } = req.body;
+
+    code = code.replaceAll(/\n+/g, "\n");
+
+    let codeLines;
+    try {
+        if (lang === "py") {
+            codeLines = [...code.matchAll(/\n /g)].length + 1;
+        } else {
+            codeLines = prettier
+                .format(code, {
+                    semi: true,
+                    parser: "babel",
+                })
+                .replaceAll("{", "")
+                .replaceAll("}", "")
+                .trim()
+                .split("\n").length;
+        }
+    } catch (err) {
+        console.log(`${uname}'s code errored`);
+        return res.status(400).json("code error");
+    }
+
+    fs.writeFile(`code/${uname}.${lang}`, code, () => {
+        console.log(`${uname} submited`);
+    });
+
+    // exec(`time -f python ./code/${uname}.${lang}`, (err, stdout, stderr) => {
+    //     console.log(stdout);
+    // });
+    users_submitted.push({
+        uname,
+        codeLines,
+        lang,
+        time: new Date().getTime() - startTime,
+    });
+
+    io.sockets.emit("codeSubmit", users_submitted);
+
+    return res.status(200).json("recived");
 });
 
 app.post("/submit", async (req, res) => {
@@ -59,7 +118,11 @@ app.post("/submit", async (req, res) => {
 
     const percentage = 100 - error;
 
-    users_submitted.push({ uname, percentage, time: new Date().getTime() - startTime});
+    users_submitted.push({
+        uname,
+        percentage,
+        time: new Date().getTime() - startTime,
+    });
 
     io.sockets.emit("submit", users_submitted);
 

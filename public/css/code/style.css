@@ -1,0 +1,55 @@
+* {
+    font-family: IBM Plex Mono, Menlo, DejaVu Sans Mono, Lucida Console,
+        monospace;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+textarea {
+    font-size: 1.25rem;
+    padding: 1rem;
+    border: 3px solid black;
+    height: 50%;
+    width: 60%;
+    resize: none;
+}
+
+button {
+    font-weight: 800;
+    font-size: 1.75rem;
+    padding: 1rem 2rem;
+    background-color: black;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+p {
+    font-size: 6rem;
+    font-weight: 800;
+}
+
+select {
+    font-weight: 800;
+    font-size: 1.75rem;
+    padding: 1rem 2rem;
+    background-color: white;
+    border: 3px solid black;
+    cursor: pointer;
+    color: black;
+}
+
+option:slotted {
+    background-color: black;
+}
